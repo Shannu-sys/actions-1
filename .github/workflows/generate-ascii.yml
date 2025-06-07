@@ -40,7 +40,7 @@ jobs:
         path: dragon.txt
 
     - name: read File
-      run: cat dragon.txt
+      run: cat dragon.txt/*
 
     - name: deploy
       run: echo "Deploying......"
