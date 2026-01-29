@@ -13,7 +13,7 @@ jobs:
       run: ls -ltrh
     
     - name: Install cowsay 
-      run: udo apt-get install cowsay -y
+      run: sudo apt-get install cowsay -y
 
     - name: Generate ASCII Artwork
       run: cowsay -f dragon "Run for cover, I am a dragon......RAWR" >> dragon.txt
