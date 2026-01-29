@@ -38,8 +38,8 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: dragon-artifact
-        
+
     - name: List & Read file
       run: |
-        ls - lrth
+        ls -lrth
         cat dragon.txt
