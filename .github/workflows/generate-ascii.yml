@@ -12,15 +12,20 @@ jobs:
     - name: Execute cowsay cmd
       run: cowsay -f dragon "Run for cover, I am a DRAGON.....RAWR" >> dragon.txt
 
-    - name: sleep for 30 seconds
-      run: sleep 30
+    - name: upload artifact to use job to job sharings
+      uses: actions/upload-artifact@v4
+      with:
+        name: dragon-artifact
+        path: dragon.txt
 
   Test:
     needs: Build
     runs-on: ubuntu-latest
-    steps:
-    - name: sleep for 10 seconds
-      run: sleep 10 
+    steps: 
+    - name: upload artifact to use job to job sharings
+      uses: actions/download-artifact@v4
+      with:
+        name: dragon-artifact
 
     - name: Search for dragon file
       run: grep -i "dragon" dragon.txt
@@ -29,6 +34,11 @@ jobs:
     needs: [Build,Test]
     runs-on: ubuntu-latest
     steps:
+    - name: upload artifact to use job to job sharings
+      uses: actions/download-artifact@v4
+      with:
+        name: dragon-artifact
+        
     - name: List & Read file
       run: |
         ls - lrth
