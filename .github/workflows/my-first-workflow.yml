@@ -12,8 +12,11 @@ jobs:
     - name: Checkout Code repo
       uses: actions/checkout@v4
 
-    - name: List files
-      run: ls -ltr
-
-    - name: Read file
-      run: cat README.md
+    - name: List files & Read files
+      run: |
+        ls -ltr
+        cat README.md
+    
+    - name: Generate ASCII Artwork
+      run: cowsay -f dragon "Run for cover, I am a dragon......RAWR" >> dragon.txt
+      
