@@ -3,43 +3,15 @@ name: Generate ascii artwork
 on: push
 
 jobs:
-  Build: 
-    runs-on: ubuntu-latest
-    steps: 
-    - name: Install cowsay
-      run: sudo apt-get install cowsay -y
-
-    - name: Execute cowsay cmd
-      run: cowsay -f dragon "Run for cover, I am a DRAGON.....RAWR" >> dragon.txt
-
-    - name: upload artifact to use job to job sharings
-      uses: actions/upload-artifact@v4
-      with:
-        name: dragon-artifact
-        path: dragon.txt
-
-  Test:
-    needs: Build
-    runs-on: ubuntu-latest
-    steps: 
-    - name: upload artifact to use job to job sharings
-      uses: actions/download-artifact@v4
-      with:
-        name: dragon-artifact
-
-    - name: Search for dragon file
-      run: grep -i "dragon" dragon.txt
-
   Deploy: 
-    needs: [Build,Test]
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu:latest, ubuntu:20.04, windows:latest]
+        images: [helloworld, alpine]
+    runs-on: $ {{ matrix.os}}
     steps:
-    - name: upload artifact to use job to job sharings
-      uses: actions/download-artifact@v4
-      with:
-        name: dragon-artifact
+    - name: Echo docker info
+      run: docker info
 
-    - name: List & Read file
-      run: |
-        ls -lrth
-        cat dragon.txt
+    - name: Run image on ${{ matrix.os }}
+      run: docker run ${{ matrix.images }}
