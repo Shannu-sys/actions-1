@@ -10,7 +10,7 @@ jobs:
           - images: alpine
             os: windows-latest
         include:
-          - image: busybox
+          - images: busybox
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
