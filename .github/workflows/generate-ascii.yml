@@ -2,7 +2,7 @@ name: Generate ascii artwork
 on: push
 jobs:
   Deploy: 
-    if: github.ref == 'refs/head/main'
+    if: github.ref == 'refs/head/feature'
     strategy:
       fail-fast: false
       max-parallel: 2
