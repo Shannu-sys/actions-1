@@ -9,6 +9,9 @@ jobs:
         exclude:
           - images: alpine
             os: windows-latest
+        include:
+          - image: busybox
+            os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
     - name: Echo docker info
